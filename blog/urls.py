@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
+#from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('post/<int:pk>/publish/', views.post_publish, name='post_publish'),
 
-    path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
+    #path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html"), name='login'),
 
-    #path('accounts/login/', auth_views.login, name='login'),
+
 ]
