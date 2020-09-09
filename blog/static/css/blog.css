@@ -10,13 +10,17 @@
     font:-size: 36pt;
     text-decoration: none;
 }
+/* Trying to change the background color of the site. */
+.content container{
+     background-color: #F0F0F0;
+}
 
 .content {
     margin-left: 40px;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Tangerine', 'Inconsolata', 'Droid Sans', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 48px;
 }
 

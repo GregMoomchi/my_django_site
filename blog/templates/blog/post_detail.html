@@ -16,12 +16,15 @@
             <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
 
         {% endif %}
+        <!-- Below I added user.is_superuser because I don't want commentators to be able to modify or delete posts.-->
+        {% if user.is_authenticated and user.is_superuser %}
 
-        {% if user.is_authenticated %}
-            <a href="{% url 'post_edit' pk=post.pk %}"><i class="far fa-edit fa-2x" style="color: #254d32;"></i></a>
+            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-dark"><i class="far fa-edit" style="color: #FFFFFF;"></i></a>
+            <!-- Below I moved the delete button into if user.is_authenticated so it would not show up unless the user is logged in. It used to be below the endif statement right under this.-->
+            <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')"><i class="far fa-trash-alt"></i></a>
+
         {% endif %}
 
-        <a href="{% url 'post_delete' pk=post.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')"><i class="fas fa-eraser"></i></a>
 
         <h1>{{ post.title }}</h1>
         <p>{{ post.text | markdown | safe }}</p>

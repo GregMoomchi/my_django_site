@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
@@ -14,10 +15,15 @@
 <body>
 
 <div class="page-header">
-    {% if user.is_authenticated %}
+    <!-- Below I added user.is_superuser because I don't want commentators to be able to modify or delete posts.-->
+    {% if user.is_authenticated and user.is_superuser %}
         <a href="{% url 'post_draft_list' %}" class="top-menu"><i class="fas fa-pencil-ruler fa-2x"></i></a>
         <a href="{% url 'post_new' %}" class="top-menu"><i class="far fa-plus-square fa-2x"></i></a>
+         <!-- Below I added the same username twice because I need this to show up whether the user is a superuser or not.-->
+        <p class="top-menu">Hello, {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
 
+    <!-- Below I added an elif statement in the case this is not a super user-->
+    {% elif user.is_authenticated %}
         <p class="top-menu">Hello, {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
 
     {% else %}
